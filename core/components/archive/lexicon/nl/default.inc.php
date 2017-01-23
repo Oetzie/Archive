@@ -56,6 +56,10 @@
 	$_lang['archive.resources_remove_selected']						= 'Geselecteerde pagina\'s verwijderen';
 	$_lang['archive.resources_remove_selected_confirm']				= 'Weet je zeker dat je de geselecteerde pagina\'s wilt verwijderen?';
 	$_lang['archive.resource_recover']								= 'Pagina herstellen';
+	$_lang['archive.resource_publish']								= 'Pagina publiceren';
+	$_lang['archive.resource_publish_confirm']						= 'De ingestelde (de)publicatiedatums zullen worden verwijderd tijdens het publiceren. Indien je wenst dat deze datums behouden worden, kies er dan voor om de pagina te wijzigen. Weet je zeker dat je deze pagina wilt publiceren?';
+	$_lang['archive.resource_unpublish']							= 'Pagina de-publiceren';
+	$_lang['archive.resource_unpublish_confirm']					= 'De ingestelde (de)publicatiedatums zullen worden verwijderd tijdens het de-publiceren. Indien je wenst dat deze datums behouden worden, kies er dan voor om de pagina te wijzigen. Weet je zeker dat je deze pagina wilt de-publiceren?';
 	
 	$_lang['archive.label_type_name']								= 'Naam';
 	$_lang['archive.label_type_name_desc']							= 'De naam van het archief, dit kan een lexicon sleutel zijn.';
@@ -87,7 +91,9 @@
 	$_lang['archive.label_resource_publishedon']					= 'Gepubliceerd op';
 	$_lang['archive.label_resource_publishedon_desc']				= '';
 	$_lang['archive.label_resource_title_duplicate']				= 'Nieuwe titel';
-	$_lang['archive.label_resource_title_duplicate_desc']			= '';
+	$_lang['archive.label_resource_title_duplicate_desc']			= 'De nieuwe titel van de pagina.';
+	$_lang['archive.label_resource_parent']							= 'Bovenliggende pagina';
+	$_lang['archive.label_resource_parent_desc']					= 'Selecteer de nieuwe bovenliggende pagina, laat dit veld leeg om de huidige bovenliggende pagina te gebruiken.';
 	
 	$_lang['archive.position_tab']									= 'Tabblad';
 	$_lang['archive.position_content']								= 'Content';

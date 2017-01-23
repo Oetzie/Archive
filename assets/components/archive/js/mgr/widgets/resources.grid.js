@@ -103,7 +103,7 @@ Archive.grid.Resources = function(config) {
         	archive 	: Archive.config.archive.id,
         	id 			: Archive.config.resource.id
         },
-        fields		: ['id', 'title', 'url', 'introtext', 'menuindex', 'published', 'deleted', 'publishedon', 'editedon'],
+        fields		: ['id', 'parent', 'parent_formatted', 'title', 'url', 'introtext', 'menuindex', 'published', 'deleted', 'publishedon', 'editedon'],
         paging		: true,
         pageSize	: 15,
         plugins		: expander,
@@ -158,14 +158,26 @@ Ext.extend(Archive.grid.Resources, MODx.grid.Grid, {
 		    text	: _('archive.resource_duplicate'),
 			handler	: this.duplicateResource
 		}];
+		
+		if (this.menu.record.published) {
+			menu.push('-', {
+		    	text	: _('archive.resource_unpublish'),
+				handler	: this.unpublishResource
+			});
+		} else {
+			menu.push('-', {
+		    	text	: _('archive.resource_publish'),
+				handler	: this.publishResource
+			});
+		}
 	    
 	    if (this.menu.record.deleted) {
-		    menu.push('-', {
+		    menu.push({
 		    	text	: _('archive.resource_recover'),
 				handler	: this.recoverResource
 			});
 	    } else {
-		    menu.push('-', {
+		    menu.push({
 		    	text	: _('archive.resource_remove'),
 				handler	: this.removeResource
 			});
@@ -184,7 +196,6 @@ Ext.extend(Archive.grid.Resources, MODx.grid.Grid, {
         if (this.duplicateResourceWindow) {
 	        this.duplicateResourceWindow.destroy();
         }
-
         this.duplicateResourceWindow = MODx.load({
 	        xtype		: 'archive-window-resource-duplicate',
 	        record		: this.menu.record,
@@ -199,6 +210,40 @@ Ext.extend(Archive.grid.Resources, MODx.grid.Grid, {
         
         this.duplicateResourceWindow.setValues(this.menu.record);
         this.duplicateResourceWindow.show(e.target);
+    },
+    unpublishResource: function(btn, e) {
+    	MODx.msg.confirm({
+        	title 		: _('archive.resource_unpublish'),
+        	text		: _('archive.resource_unpublish_confirm'),
+        	url			: MODx.config.connector_url,
+        	params		: {
+            	action		: MODx.action && MODx.action['resource/unpublish'] ? MODx.action['resource/unpublish'] : 'resource/unpublish',
+            	id			: this.menu.record.id
+            },
+            listeners	: {
+            	'success'	: {
+		        	fn			: this.refresh,
+		        	scope		: this
+		        }
+            }
+    	});
+    },
+    publishResource: function(btn, e) {
+    	MODx.msg.confirm({
+        	title 		: _('archive.resource_publish'),
+        	text		: _('archive.resource_publish_confirm'),
+        	url			: MODx.config.connector_url,
+        	params		: {
+            	action		: MODx.action && MODx.action['resource/publish'] ? MODx.action['resource/publish'] : 'resource/publish',
+            	id			: this.menu.record.id
+            },
+            listeners	: {
+            	'success'	: {
+		        	fn			: this.refresh,
+		        	scope		: this
+		        }
+            }
+    	});
     },
     removeResource: function(btn, e) {
     	MODx.msg.confirm({
@@ -348,12 +393,12 @@ Archive.window.DuplicateResource = function(config) {
         	xtype		: 'textfield',
         	fieldLabel	: _('archive.label_resource_title_duplicate'),
         	description	: MODx.expandHelp ? '' : _('archive.label_resource_title_duplicate_desc'),
-        	name		: 'pagetitle',
+        	name		: 'name',
         	anchor		: '100%',
         	allowBlank	: false
         }, {
         	xtype		: MODx.expandHelp ? 'label' : 'hidden',
-            html		: _('webshop.label_resource_title_duplicate_desc'),
+            html		: _('archive.label_resource_title_duplicate_desc'),
             cls			: 'desc-under'
         }]
     });

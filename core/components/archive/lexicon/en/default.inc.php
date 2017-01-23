@@ -44,18 +44,22 @@
 	$_lang['archive.type_unlink_resources']							= 'Pagina\'s ontkoppelen';
 	$_lang['archive.type_unlink_resources_confirm']					= 'Weet je zeker dat je alle onderliggende pagina\'s met de template "[[+template]]" wilt ontkoppelen van dit archief?';
 	
-	$_lang['archive.resource']										= 'Page';
-	$_lang['archive.resources']										= 'Pages';
-	$_lang['archive.resources_desc']								= 'Here you can manage al the child pages.';
-	$_lang['archive.resource_show'	]								= 'Show page';
-	$_lang['archive.resource_create']								= 'New page';
-	$_lang['archive.resource_update']								= 'Update page';
-	$_lang['archive.resource_duplicate']							= 'Duplicate page';
-	$_lang['archive.resource_remove']								= 'Delete page';
-	$_lang['archive.resource_remove_confirm']						= 'Are you sure you want to delete this page?';
-	$_lang['archive.resources_remove_selected']						= 'Delete selected pages';
-	$_lang['archive.resources_remove_selected_confirm']				= 'Are you sure you want to delete the selected pages?';
-	$_lang['archive.resource_recover']								= 'Recover page';
+	$_lang['archive.resource']										= 'Resource';
+	$_lang['archive.resources']										= 'Resources';
+	$_lang['archive.resources_desc']								= 'Here you can manage al the child resources.';
+	$_lang['archive.resource_show'	]								= 'Show resource';
+	$_lang['archive.resource_create']								= 'New resource';
+	$_lang['archive.resource_update']								= 'Update resource';
+	$_lang['archive.resource_duplicate']							= 'Duplicate resource';
+	$_lang['archive.resource_remove']								= 'Delete resource';
+	$_lang['archive.resource_remove_confirm']						= 'Are you sure you want to delete this resource?';
+	$_lang['archive.resources_remove_selected']						= 'Delete selected resources';
+	$_lang['archive.resources_remove_selected_confirm']				= 'Are you sure you want to delete the selected resources?';
+	$_lang['archive.resource_recover']								= 'Recover resource';
+	$_lang['archive.resource_publish']								= 'Publish resource';
+	$_lang['archive.resource_publish_confirm']						= 'Publishing this resource now will remove any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the resource instead.<br /><br />Proceed?';
+	$_lang['archive.resource_unpublish']							= 'Unpublish resource';
+	$_lang['archive.resource_unpublish_confirm']					= 'Un-publishing this resource now will remove any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the resource instead. <br /><br />Proceed?';
 	
 	$_lang['archive.label_type_name']								= 'Name';
 	$_lang['archive.label_type_name_desc']							= 'The name of the archive, this can be a lexicon key.';
@@ -87,7 +91,9 @@
 	$_lang['archive.label_resource_publishedon']					= 'Published at';
 	$_lang['archive.label_resource_publishedon_desc']				= '';
 	$_lang['archive.label_resource_title_duplicate']				= 'New title';
-	$_lang['archive.label_resource_title_duplicate_desc']			= '';
+	$_lang['archive.label_resource_title_duplicate_desc']			= 'The new title of the resource.';
+	$_lang['archive.label_resource_parent']							= 'Parent resource';
+	$_lang['archive.label_resource_parent_desc']					= 'The parent resource\'s ID number.';
 	
 	$_lang['archive.position_tab']									= 'Tab';
 	$_lang['archive.position_content']								= 'Content';

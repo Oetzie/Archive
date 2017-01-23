@@ -110,9 +110,14 @@
 		 */
 		public function prepareRow(xPDOObject $object) {
 			$array = array_merge($object->toArray(), array(
-				'url' 	=> $this->modx->makeUrl($object->id, '', '', 'full'),
-				'title'	=> $object->pagetitle.($this->modx->hasPermission('tree_show_resource_ids') ? ' ('.$object->id.')' : '')
+				'url' 				=> $this->modx->makeUrl($object->id, '', '', 'full'),
+				'title'				=> htmlentities($object->pagetitle.($this->modx->hasPermission('tree_show_resource_ids') ? ' ('.$object->id.')' : ''), ENT_COMPAT, $this->modx->getOption('modx_charset', null, 'UTF-8')),
+				'parent_formatted'	=> ''
 			));
+			
+			if (null !== ($parent = $this->modx->getObject('modResource', $object->parent))) {
+				$array['parent_formatted'] = htmlentities($parent->pagetitle.($this->modx->hasPermission('tree_show_resource_ids') ? ' ('.$parent->id.')' : ''), ENT_COMPAT, $this->modx->getOption('modx_charset', null, 'UTF-8'));
+			}
 			
 			if (in_array($array['publishedon'], array('-001-11-30 00:00:00', '-1-11-30 00:00:00', '0000-00-00 00:00:00', null))) {
 				$array['publishedon'] = '';
