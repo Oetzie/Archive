@@ -3,6 +3,13 @@ Archive
 ----------------------
 
 ----------------------
+Version: 1.0.1-pl
+Released: 2017-02-06
+----------------------
+- Change parent resource function
+- Bug fixes
+
+----------------------
 Version: 1.0.0-pl
 Released: 2016-12-02
 ----------------------

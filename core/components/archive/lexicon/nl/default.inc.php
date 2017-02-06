@@ -1,24 +1,24 @@
 <?php
 
 	/**
-	 * Webshop
+	 * Archive
 	 *
 	 * Copyright 2016 by Oene Tjeerd de Bruin <info@oetzie.nl>
 	 *
-	 * This file is part of Webshop, a real estate property listings component
+	 * This file is part of Archive, a real estate property listings component
 	 * for MODX Revolution.
 	 *
-	 * Webshop is free software; you can redistribute it and/or modify it under
+	 * Archive is free software; you can redistribute it and/or modify it under
 	 * the terms of the GNU General Public License as published by the Free Software
 	 * Foundation; either version 2 of the License, or (at your option) any later
 	 * version.
 	 *
-	 * Webshop is distributed in the hope that it will be useful, but WITHOUT ANY
+	 * Archive is distributed in the hope that it will be useful, but WITHOUT ANY
 	 * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 	 * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 	 *
 	 * You should have received a copy of the GNU General Public License along with
-	 * Webshop; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+	 * Archive; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
 	 * Suite 330, Boston, MA 02111-1307 USA
 	 */
 
@@ -51,6 +51,7 @@
 	$_lang['archive.resource_create']								= 'Nieuwe pagina';
 	$_lang['archive.resource_update']								= 'Pagina wijzigen';
 	$_lang['archive.resource_duplicate']							= 'Pagina kopiëren';
+	$_lang['archive.resource_move']									= 'Pagina verplaatsen';
 	$_lang['archive.resource_remove']								= 'Pagina verwijderen';
 	$_lang['archive.resource_remove_confirm']						= 'Weet je zeker dat je deze pagina wilt verwijderen?';
 	$_lang['archive.resources_remove_selected']						= 'Geselecteerde pagina\'s verwijderen';
@@ -93,7 +94,7 @@
 	$_lang['archive.label_resource_title_duplicate']				= 'Nieuwe titel';
 	$_lang['archive.label_resource_title_duplicate_desc']			= 'De nieuwe titel van de pagina.';
 	$_lang['archive.label_resource_parent']							= 'Bovenliggende pagina';
-	$_lang['archive.label_resource_parent_desc']					= 'Selecteer de nieuwe bovenliggende pagina, laat dit veld leeg om de huidige bovenliggende pagina te gebruiken.';
+	$_lang['archive.label_resource_parent_desc']					= 'Selecteer de nieuwe bovenliggende pagina.';
 	
 	$_lang['archive.position_tab']									= 'Tabblad';
 	$_lang['archive.position_content']								= 'Content';
@@ -110,5 +111,6 @@
 	$_lang['archive.sort_field_deletedon']							= 'Verwijderingsdatum';
 	$_lang['archive.sort_field_menutitle']							= 'Menutitel';
 	$_lang['archive.archive_error_exists']							= 'Er bestaat al een archief voor deze template.';
-		
+	$_lang['archive.resource_error_wrong_parent']					= 'De nieuwe bovenliggende pagina heeft niet de juiste template voor deze pagina. Alleen pagina\'s met de template "[[+template]]" kunnen een bovenliggende pagina van deze pagina worden.';				
+
 ?>

@@ -50,7 +50,7 @@
 			$this->config = array_merge(array(
 				'namespace'				=> $this->modx->getOption('namespace', $config, 'archive'),
 				'helpurl'				=> $this->modx->getOption('namespace', $config, 'archive'),
-				'lexicons'				=> array('archive:default', 'archive:types'),
+				'lexicons'				=> array('archive:default', 'site:default'),
 				'base_path'				=> $corePath,
 				'core_path' 			=> $corePath,
 				'model_path' 			=> $corePath.'model/',

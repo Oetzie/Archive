@@ -75,5 +75,5 @@
 			return $modx->getOption('archive.core_path', null, $modx->getOption('core_path').'components/archive/').'controllers/';
 		}
 	}
-	
+		
 ?>

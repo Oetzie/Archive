@@ -20,7 +20,7 @@ Archive.grid.Resources = function(config) {
 	        	fn			: this.filterSearch,
 	        	scope		: this
 	        },
-	        'render'		: {
+	        'render'	: {
 		        fn			: function(cmp) {
 			        new Ext.KeyMap(cmp.getEl(), {
 				        key		: Ext.EventObject.ENTER,
@@ -103,7 +103,7 @@ Archive.grid.Resources = function(config) {
         	archive 	: Archive.config.archive.id,
         	id 			: Archive.config.resource.id
         },
-        fields		: ['id', 'parent', 'parent_formatted', 'title', 'url', 'introtext', 'menuindex', 'published', 'deleted', 'publishedon', 'editedon'],
+        fields		: ['id', 'context_key', 'parent', 'parent_formatted', 'title', 'url', 'introtext', 'menuindex', 'alias', 'published', 'deleted', 'publishedon', 'editedon'],
         paging		: true,
         pageSize	: 15,
         plugins		: expander,
@@ -157,6 +157,9 @@ Ext.extend(Archive.grid.Resources, MODx.grid.Grid, {
 	    }, {
 		    text	: _('archive.resource_duplicate'),
 			handler	: this.duplicateResource
+		}, {
+			text 	: _('archive.resource_move'),
+			handler : this.moveResource
 		}];
 		
 		if (this.menu.record.published) {
@@ -211,6 +214,26 @@ Ext.extend(Archive.grid.Resources, MODx.grid.Grid, {
         this.duplicateResourceWindow.setValues(this.menu.record);
         this.duplicateResourceWindow.show(e.target);
     },
+    moveResource: function(btn, e) {
+        if (this.moveResourceWindow) {
+	        this.moveResourceWindow.destroy();
+        }
+        this.moveResourceWindow = MODx.load({
+	        xtype		: 'archive-window-resource-move',
+	        record		: this.menu.record,
+	        closeAction	:'close',
+	        listeners	: {
+		        'success'	: {
+		        	fn			: this.refresh,
+		        	scope		: this
+		        }
+	         }
+        });
+        
+        this.moveResourceWindow.setValues(this.menu.record);
+        this.moveResourceWindow.show(e.target);
+    },
+
     unpublishResource: function(btn, e) {
     	MODx.msg.confirm({
         	title 		: _('archive.resource_unpublish'),
@@ -384,12 +407,14 @@ Archive.window.DuplicateResource = function(config) {
     Ext.applyIf(config, {
     	autoHeight	: true,
         title 		: _('archive.resource_duplicate'),
-        url			: MODx.config.connector_url,
+        url			: Archive.config.connector_url,
         baseParams	: {
-            action		: MODx.action && MODx.action['resource/duplicate'] ? MODx.action['resource/duplicate'] : 'resource/duplicate',
-            id			: config.record.id
+            action		: 'mgr/archive/duplicate'
         },
         fields		: [{
+			xtype		: 'hidden',
+			name		: 'id'
+		}, {
         	xtype		: 'textfield',
         	fieldLabel	: _('archive.label_resource_title_duplicate'),
         	description	: MODx.expandHelp ? '' : _('archive.label_resource_title_duplicate_desc'),
@@ -409,3 +434,59 @@ Archive.window.DuplicateResource = function(config) {
 Ext.extend(Archive.window.DuplicateResource, MODx.Window);
 
 Ext.reg('archive-window-resource-duplicate', Archive.window.DuplicateResource);
+
+Archive.window.MoveResource = function(config) {
+    config = config || {};
+
+    Ext.applyIf(config, {
+    	autoHeight	: true,
+        title 		: _('archive.resource_move'),
+        url			: Archive.config.connector_url,
+        baseParams	: {
+            action		: 'mgr/archive/move'
+        },
+        id			: 'archive-window-resource-move',
+        fields		: [{
+			xtype		: 'hidden',
+			name		: 'id'
+		}, {
+			xtype		: 'hidden',
+			name		: 'old_parent',
+			value 		: config.record.parent,
+		}, {
+			xtype		: 'hidden',
+			name		: 'context_key',
+			id			: 'archive-window-resource-move-context-key'
+		}, {
+			xtype		: 'hidden',
+			name		: 'new_parent',
+			id			: 'archive-window-resource-move-parent-hidden',
+			value 		: config.record.parent
+		}, {
+    		xtype		: 'modx-field-parent-change',
+    		fieldLabel	: _('archive.label_resource_parent'),
+			description	: MODx.expandHelp ? '' : _('newsletter.label_resource_parent_desc'),
+			anchor		: '100%',
+			name		: 'parent-cmb',
+			value 		: config.record.parent_formatted,
+			allowBlank	: false,
+			formpanel	: 'archive-window-resource-move',
+			parentcmp	: 'archive-window-resource-move-parent-hidden',
+			contextcmp	: 'archive-window-resource-move-context-key',
+			currentid	: config.record.id
+		}, {
+        	xtype		: MODx.expandHelp ? 'label' : 'hidden',
+            html		: _('archive.label_resource_parent_desc'),
+            cls			: 'desc-under'
+        }, {
+			xtype		: 'hidden',
+			name		: 'alias'
+		}]
+    });
+
+    Archive.window.MoveResource.superclass.constructor.call(this, config);
+};
+
+Ext.extend(Archive.window.MoveResource, MODx.Window);
+
+Ext.reg('archive-window-resource-move', Archive.window.MoveResource);
