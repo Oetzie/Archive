@@ -5,11 +5,6 @@ Archive.panel.Resource = function(config) {
         id			: 'archive-panel-resource',
         layout		: 'form',
         anchor		: '100%',
-        defaults 	: {
-	        autoWidth	: true,
-	        autoHeight	: true,
-	        border 		: false
-	    },
         items		: [{
 	    	html			: '<p>' + (undefined == _(Archive.config.archive.description) ? _('archive.resources_desc') : _(Archive.config.archive.description)) + '</p>',
 	        bodyCssClass	: 'panel-desc'

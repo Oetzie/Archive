@@ -3,10 +3,7 @@
 	/**
 	 * Archive
 	 *
-	 * Copyright 2016 by Oene Tjeerd de Bruin <info@oetzie.nl>
-	 *
-	 * This file is part of Archive, a real estate property listings component
-	 * for MODX Revolution.
+	 * Copyright 2017 by Oene Tjeerd de Bruin <modx@oetzie.nl>
 	 *
 	 * Archive is free software; you can redistribute it and/or modify it under
 	 * the terms of the GNU General Public License as published by the Free Software
@@ -39,9 +36,9 @@
 	$_lang['archive.type_remove_confirm']							= 'Weet je zeker dat je dit archief wilt verwijderen? Alle onderliggende pagina\'s zullen weer ontkoppeld worden.';
 	$_lang['archive.types_remove_selected']							= 'Geselecteerde archieven verwijderen';
 	$_lang['archive.types_remove_selected_confirm']					= 'Weet je zeker dat je de geselecteerde archieven wilt verwijderen? Alle onderliggende pagina\'s zullen weer ontkoppeld worden.';
-	$_lang['archive.type_link_resources']							= 'Pagina\'s koppelen';
+	$_lang['archive.type_link_resources']							= 'Onderliggende pagina\'s koppelen';
 	$_lang['archive.type_link_resources_confirm']					= 'Weet je zeker dat je alle onderliggende pagina\'s met de template "[[+template]]" wilt koppelen aan dit archief?';
-	$_lang['archive.type_unlink_resources']							= 'Pagina\'s ontkoppelen';
+	$_lang['archive.type_unlink_resources']							= 'Onderliggende pagina\'s ontkoppelen';
 	$_lang['archive.type_unlink_resources_confirm']					= 'Weet je zeker dat je alle onderliggende pagina\'s met de template "[[+template]]" wilt ontkoppelen van dit archief?';
 	
 	$_lang['archive.resource']										= 'Pagina';

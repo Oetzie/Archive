@@ -3,10 +3,7 @@
 	/**
 	 * Archive
 	 *
-	 * Copyright 2016 by Oene Tjeerd de Bruin <info@oetzie.nl>
-	 *
-	 * This file is part of Archive, a real estate property listings component
-	 * for MODX Revolution.
+	 * Copyright 2017 by Oene Tjeerd de Bruin <modx@oetzie.nl>
 	 *
 	 * Archive is free software; you can redistribute it and/or modify it under
 	 * the terms of the GNU General Public License as published by the Free Software
@@ -24,43 +21,45 @@
 
 	class ArchiveTypesCreateProcessor extends modObjectCreateProcessor {
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @var String.
 		 */
 		public $classKey = 'ArchiveTypes';
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @var Array.
 		 */
 		public $languageTopics = array('archive:default');
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @var String.
 		 */
 		public $objectType = 'archive.types';
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @var Object.
 		 */
 		public $archive;
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @return Mixed.
 		 */
 		public function initialize() {
 			$this->archive = $this->modx->getService('archive', 'Archive', $this->modx->getOption('archive.core_path', null, $this->modx->getOption('core_path').'components/archive/').'model/archive/');
-		
-			list($field, $dir) = explode(':', $this->getProperty('sort'));
 			
-			$this->setDefaultProperties(array(
-				'sort_field'	=> $field,
-				'sort_dir'		=> $dir,
-				'sort_dd'		=> 'menuindex' == $field ? 1 : 0
-			));
+			if (null !== ($sort = $this->getProperty('sort'))) {
+				list($field, $dir) = explode(':', $sort);
+				
+				$this->setDefaultProperties(array(
+					'sort_field'	=> $field,
+					'sort_dir'		=> $dir,
+					'sort_dd'		=> 'menuindex' == $field ? 1 : 0
+				));
+			}
 			
 			if (null === $this->getProperty('link_resources')) {
 				$this->setProperty('link_resources', 0);
@@ -70,7 +69,7 @@
 		}
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @return Mixed.
 		 */
 		public function beforeSave() {
@@ -86,7 +85,7 @@
 		}
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @return Mixed.
 		 */
 		public function afterSave() {

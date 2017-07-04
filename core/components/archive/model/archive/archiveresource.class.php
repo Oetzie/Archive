@@ -3,10 +3,7 @@
 	/**
 	 * Archive
 	 *
-	 * Copyright 2016 by Oene Tjeerd de Bruin <info@oetzie.nl>
-	 *
-	 * This file is part of Archive, a real estate property listings component
-	 * for MODX Revolution.
+	 * Copyright 2017 by Oene Tjeerd de Bruin <modx@oetzie.nl>
 	 *
 	 * Archive is free software; you can redistribute it and/or modify it under
 	 * the terms of the GNU General Public License as published by the Free Software
@@ -24,32 +21,32 @@
 	
 	class ArchiveResource extends modResource {
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @var Object.
 		 */
 		public $archive;
 		
 		/**
-		 * @acces public
+		 * @access public
 		 * @var Boolean.
 		 */
 		public $showInContextMenu = true;
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @param Object $xpdo.
 		 */
-		function __construct(& $xpdo) {
+		public function __construct(& $xpdo) {
         	parent::__construct($xpdo);
         	
         	$this->set('class_key', 'ArchiveResource');
 			$this->set('show_in_tree', false);
         	
-			$this->webshop = $this->xpdo->getService('archive', 'Archive', $this->xpdo->getOption('archive.core_path', null, $this->xpdo->getOption('core_path').'components/archive/').'model/archive/');
+			$this->archive = $this->xpdo->getService('archive', 'Archive', $this->xpdo->getOption('archive.core_path', null, $this->xpdo->getOption('core_path').'components/archive/').'model/archive/');
     	}
     	
     	/**
-	     * @acces public.
+	     * @access public.
 	     * @return String.
 	     */
 	    public function getResourceTypeName() {
@@ -57,7 +54,7 @@
 		}
     	
     	/**
-	     * @acces public.
+	     * @access public.
 	     * @return Array.
 	     */
     	public function getContextMenuText() {
@@ -68,7 +65,7 @@
 	    }
 
 	    /**
-	     * @acces public.
+	     * @access public.
 	     * @return String.
 	     */
 	    public static function getControllerPath(xPDO &$modx) {

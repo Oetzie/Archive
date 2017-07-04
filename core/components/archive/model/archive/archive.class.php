@@ -3,10 +3,7 @@
 	/**
 	 * Archive
 	 *
-	 * Copyright 2016 by Oene Tjeerd de Bruin <info@oetzie.nl>
-	 *
-	 * This file is part of Archive, a real estate property listings component
-	 * for MODX Revolution.
+	 * Copyright 2017 by Oene Tjeerd de Bruin <modx@oetzie.nl>
 	 *
 	 * Archive is free software; you can redistribute it and/or modify it under
 	 * the terms of the GNU General Public License as published by the Free Software
@@ -24,19 +21,19 @@
 
 	class Archive {
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @var Object.
 		 */
 		public $modx;
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @var Array.
 		 */
 		public $config = array();
 	    
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @param Object $modx.
 		 * @param Array $config.
 		*/
@@ -66,6 +63,10 @@
 				'css_url' 				=> $assetsUrl.'css/',
 				'assets_url' 			=> $assetsUrl,
 				'connector_url'			=> $assetsUrl.'connector.php',
+				'version'				=> '1.0.2',
+				'branding'				=> (boolean) $this->modx->getOption('archive.branding', null, true),
+				'branding_url'			=> 'http://www.oetzie.nl',
+				'branding_help_url'		=> 'http://www.werkvanoetzie.nl/extras/archive',
 				'context'				=> $this->getContexts()
 			), $config);
 			
@@ -81,15 +82,15 @@
 		}
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @return String.
 		 */
 		public function getHelpUrl() {
-			return $this->config['helpurl'];
+			return $this->config['branding_help_url'].'?v='.$this->config['version'];
 		}
 		
 		/**
-		 * @acces private.
+		 * @access private.
 		 * @return Boolean.
 		 */
 		private function getContexts() {

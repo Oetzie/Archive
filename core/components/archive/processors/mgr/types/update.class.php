@@ -3,10 +3,7 @@
 	/**
 	 * Archive
 	 *
-	 * Copyright 2016 by Oene Tjeerd de Bruin <info@oetzie.nl>
-	 *
-	 * This file is part of Archive, a real estate property listings component
-	 * for MODX Revolution.
+	 * Copyright 2017 by Oene Tjeerd de Bruin <modx@oetzie.nl>
 	 *
 	 * Archive is free software; you can redistribute it and/or modify it under
 	 * the terms of the GNU General Public License as published by the Free Software
@@ -24,49 +21,51 @@
 
 	class ArchiveTypesUpdateProcessor extends modObjectUpdateProcessor {
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @var String.
 		 */
 		public $classKey = 'ArchiveTypes';
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @var Array.
 		 */
 		public $languageTopics = array('archive:default');
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @var String.
 		 */
 		public $objectType = 'archive.types';
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @var Object.
 		 */
 		public $archive;
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @return Mixed.
 		 */
 		public function initialize() {
 			$this->archive = $this->modx->getService('archive', 'Archive', $this->modx->getOption('archive.core_path', null, $this->modx->getOption('core_path').'components/archive/').'model/archive/');
 		
-			list($field, $dir) = explode(':', $this->getProperty('sort'));
+			if (null !== ($sort = $this->getProperty('sort'))) {
+				list($field, $dir) = explode(':', $sort);
+				
+				$this->setDefaultProperties(array(
+					'sort_field'	=> $field,
+					'sort_dir'		=> $dir,
+					'sort_dd'		=> 'menuindex' == $field ? 1 : 0
+				));
+			}
 			
-			$this->setDefaultProperties(array(
-				'sort_field'	=> $field,
-				'sort_dir'		=> $dir,
-				'sort_dd'		=> 'menuindex' == $field ? 1 : 0
-			));
-
 			return parent::initialize();
 		}
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @return Mixed.
 		 */
 		public function beforeSave() {

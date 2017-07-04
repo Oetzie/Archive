@@ -2,10 +2,10 @@ Archive.grid.Resources = function(config) {
     config = config || {};
     
 	config.tbar = [{
-        text	: _('archive.resource_create'),
-        cls		: 'primary-button',
-        handler	: function() {
-	        var action = (MODx.action && MODx.action['resource/create']) ? MODx.action['resource/create'] : 'resource/create';
+        text		: _('archive.resource_create'),
+        cls			: 'primary-button',
+        handler		: function() {
+	        var action = MODx.action && MODx.action['resource/create'] ? MODx.action['resource/create'] : 'resource/create';
 	        
 	        MODx.loadPage(action, 'parent=' + Archive.config.resource.id + '&class_key=' + Archive.config.archive.class + '&template=' + Archive.config.archive.child_template)
         },
@@ -123,7 +123,7 @@ Archive.grid.Resources = function(config) {
 	    ddGroup 	: 'archive-grid-resources',
 	    listeners	: {
 		    'afterrender' : {
-			    fn 			: this.ddRow,
+			    fn 			: this.sortResources,
 			    scope 		: this
 		    }
 	    }
@@ -149,7 +149,7 @@ Ext.extend(Archive.grid.Resources, MODx.grid.Grid, {
         menu = [{
 	        text	: _('archive.resource_update'),
 	        handler	: function() {
-		        var action = (MODx.action && MODx.action['resource/update']) ? MODx.action['resource/update'] : 'resource/update';
+		        var action = MODx.action && MODx.action['resource/update'] ? MODx.action['resource/update'] : 'resource/update';
 		        
 				MODx.loadPage(action, 'id=' + this.menu.record.id);
 	        },
@@ -202,13 +202,13 @@ Ext.extend(Archive.grid.Resources, MODx.grid.Grid, {
         this.duplicateResourceWindow = MODx.load({
 	        xtype		: 'archive-window-resource-duplicate',
 	        record		: this.menu.record,
-	        closeAction	:'close',
+	        closeAction	: 'close',
 	        listeners	: {
 		        'success'	: {
 		        	fn			: this.refresh,
 		        	scope		: this
 		        }
-	         }
+	        }
         });
         
         this.duplicateResourceWindow.setValues(this.menu.record);
@@ -221,13 +221,13 @@ Ext.extend(Archive.grid.Resources, MODx.grid.Grid, {
         this.moveResourceWindow = MODx.load({
 	        xtype		: 'archive-window-resource-move',
 	        record		: this.menu.record,
-	        closeAction	:'close',
+	        closeAction	: 'close',
 	        listeners	: {
 		        'success'	: {
 		        	fn			: this.refresh,
 		        	scope		: this
 		        }
-	         }
+	        }
         });
         
         this.moveResourceWindow.setValues(this.menu.record);
@@ -328,29 +328,29 @@ Ext.extend(Archive.grid.Resources, MODx.grid.Grid, {
 			}
 		});  
     },
-    ddRow: function() {
+    sortResources: function() {
 		var scope = this;
 
 		var ddrow = new Ext.dd.DropTarget(this.getView().mainBody, {
         	ddGroup 	: this.config.ddGroup,
         	notifyDrop 	: function(dd, e, data) {
-            	var sm = scope.getSelectionModel();
+            	var sm = data.grid.getSelectionModel();
                 var sels = sm.getSelections();
-                var cindex = dd.getDragData(e).rowIndex;
+                var index = dd.getDragData(e).rowIndex;
                 
-                if (undefined != cindex) {
-	                var record = scope.getStore().getAt(cindex);
+                if (undefined != index) {
+	                var record = data.grid.getStore().getAt(index);
 
 	                if (sm.hasSelection()) {
                 		for (i = 0; i < sels.length; i++) {
-	                    	scope.getStore().remove(scope.getStore().getById(sels[i].id));
-	                        scope.getStore().insert(cindex, sels[i]);
+	                    	data.grid.getStore().remove(data.grid.getStore().getById(sels[i].id));
+	                        data.grid.getStore().insert(index, sels[i]);
 	                    }
 	                    
 	                    sm.selectRecords(sels);
 	                }
 	                
-	                var sm = scope.getStore().data.items;
+	                var sm = data.grid.getStore().data.items;
 	                var sort = new Array();
 	                
 	                for (var i = 0; i < sm.length; i++) {
@@ -368,9 +368,9 @@ Ext.extend(Archive.grid.Resources, MODx.grid.Grid, {
 		                listeners	: {
 			                'success'	: {
 				                fn 			: function(r) {
-			            			scope.getSelectionModel().clearSelections(true);
+			            			data.grid.getSelectionModel().clearSelections(true);
 			            			
-			            			scope.refresh();
+			            			data.grid.refresh();
 					            },
 					            scope 		: this
 					        }
@@ -381,7 +381,7 @@ Ext.extend(Archive.grid.Resources, MODx.grid.Grid, {
         });
     },
     renderName: function(d, c, e) {
-	    var action = (MODx.action && MODx.action['resource/update']) ? MODx.action['resource/update'] : 'resource/update';
+	    var action = MODx.action && MODx.action['resource/update'] ? MODx.action['resource/update'] : 'resource/update';
 	    
 	    return String.format('<a href="?a={0}&id={1}" title="{2}" class="x-grid-link">{3}</a>', action, e.json.id, _('archive.resource_update'), Ext.util.Format.htmlEncode(d));
     },

@@ -21,7 +21,7 @@
 	    'menuindex' 	=> 0,
 	    'params' 		=> '',
 	    'handler' 		=> '',
-	    'permissions'	=> 'administrator'
+	    'permissions'	=> 'archive'
 	), '', true, true);
 	
 	$menu->addOne($action);

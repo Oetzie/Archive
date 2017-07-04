@@ -3,10 +3,7 @@
 	/**
 	 * Archive
 	 *
-	 * Copyright 2016 by Oene Tjeerd de Bruin <info@oetzie.nl>
-	 *
-	 * This file is part of Archive, a real estate property listings component
-	 * for MODX Revolution.
+	 * Copyright 2017 by Oene Tjeerd de Bruin <modx@oetzie.nl>
 	 *
 	 * Archive is free software; you can redistribute it and/or modify it under
 	 * the terms of the GNU General Public License as published by the Free Software
@@ -24,13 +21,13 @@
 
 	abstract class ArchiveManagerController extends modExtraManagerController {
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @var Object.
 		 */
 		public $archive;
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @return Mixed.
 		 */
 		public function initialize() {
@@ -40,7 +37,7 @@
 			
 			$this->addHtml('<script type="text/javascript">
 				Ext.onReady(function() {
-					MODx.config.help_url = "http://rtfm.modx.com/extras/revo/'.$this->archive->getHelpUrl().'";
+					MODx.config.help_url = "'.$this->archive->getHelpUrl().'";
 
 					Archive.config = '.$this->modx->toJSON($this->archive->config).';
 				});
@@ -50,7 +47,7 @@
 		}
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @return Array.
 		 */
 		public function getLanguageTopics() {
@@ -58,17 +55,17 @@
 		}
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @returns Boolean.
 		 */	    
 		public function checkPermissions() {
-			return true;
+			return $this->modx->hasPermission('clientexceptions');
 		}
 	}
 		
 	class IndexManagerController extends ArchiveManagerController {
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @return String.
 		 */
 		public static function getDefaultController() {

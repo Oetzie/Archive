@@ -2,18 +2,11 @@ Archive.grid.Types = function(config) {
     config = config || {};
 
 	config.tbar = [{
-        text	: _('archive.type_create'),
-        cls		:'primary-button',
-        handler	: this.createType,
-        scope	: this
-    }, {
-		text	: _('bulk_actions'),
-		menu	: [{
-			text	: _('archive.types_remove_selected'),
-			handler	: this.removeSelectedTypes,
-			scope	: this
-		}]
-	}, '->', {
+        text		: _('archive.type_create'),
+        cls			: 'primary-button',
+        handler		: this.createType,
+        scope		: this
+    }, '->', {
         xtype		: 'textfield',
         name 		: 'archive-filter-search',
         id			: 'archive-filter-search',
@@ -47,8 +40,6 @@ Archive.grid.Types = function(config) {
         }
     }];
     
-    sm = new Ext.grid.CheckboxSelectionModel();
-    
     expander = new Ext.grid.RowExpander({
         tpl : new Ext.Template(
             '<p class="desc">{description_formatted}</p>'
@@ -56,7 +47,7 @@ Archive.grid.Types = function(config) {
     });
 
     columns = new Ext.grid.ColumnModel({
-       columns: [sm, expander, {
+       columns: [expander, {
             header		: _('archive.label_type_name'),
             dataIndex	: 'name_formatted',
             sortable	: true,
@@ -88,7 +79,6 @@ Archive.grid.Types = function(config) {
     });
     
     Ext.applyIf(config, {
-    	sm 			: sm,
     	cm			: columns,
         id			: 'archive-grid-types',
         url			: Archive.config.connector_url,
@@ -143,7 +133,7 @@ Ext.extend(Archive.grid.Types, MODx.grid.Grid, {
 		}, '-', {
 		    text	: _('archive.type_remove'),
 		    handler	: this.removeType
-		 }];
+		}];
     },
     createType: function(btn, e) {
         if (this.createTypeWindow) {
@@ -162,7 +152,7 @@ Ext.extend(Archive.grid.Types, MODx.grid.Grid, {
 	            	},
 		        	scope		: this
 		        }
-	         }
+	        }
         });
         
         this.createTypeWindow.show(e.target);
@@ -185,7 +175,7 @@ Ext.extend(Archive.grid.Types, MODx.grid.Grid, {
 	            	},
 		        	scope		: this
 		        }
-	         }
+	        }
         });
         
         this.updateTypeWindow.setValues(this.menu.record);
@@ -215,7 +205,9 @@ Ext.extend(Archive.grid.Types, MODx.grid.Grid, {
     linkResources: function(btn, e) {
     	MODx.msg.confirm({
         	title 		: _('archive.type_link_resources'),
-        	text		: _('archive.type_link_resources_confirm', {template: this.menu.record.child_template_name}),
+        	text		: _('archive.type_link_resources_confirm', {
+	        	template	: this.menu.record.child_template_name
+	        }),
         	url			: Archive.config.connector_url,
         	params		: {
             	action		: 'mgr/types/link',
@@ -237,7 +229,9 @@ Ext.extend(Archive.grid.Types, MODx.grid.Grid, {
     unlinkResources: function(btn, e) {
     	MODx.msg.confirm({
         	title 		: _('archive.type_unlink_resources'),
-        	text		: _('archive.type_unlink_resources_confirm', {template: this.menu.record.child_template_name}),
+        	text		: _('archive.type_unlink_resources_confirm', {
+	        	template	: this.menu.record.child_template_name
+	        }),
         	url			: Archive.config.connector_url,
         	params		: {
             	action		: 'mgr/types/link',
@@ -251,34 +245,6 @@ Ext.extend(Archive.grid.Types, MODx.grid.Grid, {
 	            		
 	            		this.refresh();
 	            	},
-            		scope		: this
-            	}
-            }
-    	});
-    },
-    removeSelectedTypes: function(btn, e) {
-    	var cs = this.getSelectedAsList();
-    	
-        if (cs === false) {
-        	return false;
-        }
-        
-    	MODx.msg.confirm({
-        	title 	: _('archive.types_remove_selected'),
-        	text	: _('archive.types_remove_selected_confirm'),
-        	url		: Archive.config.connector_url,
-        	params	: {
-            	action	: 'mgr/types/removeselected',
-            	ids		: cs
-            },
-            listeners: {
-            	'success'	: {
-            		fn			: function() {
-	            		Ext.getCmp('modx-resource-tree').refresh();
-	            		
-            			this.getSelectionModel().clearSelections(true);
-            			this.refresh();
-            		},
             		scope		: this
             	}
             }

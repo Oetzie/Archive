@@ -3,10 +3,7 @@
 	/**
 	 * Archive
 	 *
-	 * Copyright 2016 by Oene Tjeerd de Bruin <info@oetzie.nl>
-	 *
-	 * This file is part of Archive, a real estate property listings component
-	 * for MODX Revolution.
+	 * Copyright 2017 by Oene Tjeerd de Bruin <modx@oetzie.nl>
 	 *
 	 * Archive is free software; you can redistribute it and/or modify it under
 	 * the terms of the GNU General Public License as published by the Free Software
@@ -24,50 +21,50 @@
 
 	class ArchiveResourcesGetListProcessor extends modObjectGetListProcessor {
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @var String.
 		 */
 		public $classKey = 'modResource';
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @var Array.
 		 */
 		public $languageTopics = array('archive:default');
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @var String.
 		 */
 		public $defaultSortField = 'id';
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @var String.
 		 */
 		public $defaultSortDirection = 'DESC';
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @var String.
 		 */
 		public $objectType = 'archive.resources';
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @var Object.
 		 */
 		public $archive;
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @return Mixed.
 		 */
 		public function initialize() {
 			$this->archive = $this->modx->getService('archive', 'Archive', $this->modx->getOption('archive.core_path', null, $this->modx->getOption('core_path').'components/archive/').'model/archive/');
 			
 			$this->setDefaultProperties(array(
-				'dateFormat' 	=> $this->modx->getOption('manager_date_format') .', '. $this->modx->getOption('manager_time_format')
+				'dateFormat' => $this->modx->getOption('manager_date_format') .', '. $this->modx->getOption('manager_time_format')
 			));
 			
 			if (null !== ($archive = $this->modx->getObject('ArchiveTypes', $this->getProperty('archive')))) {
@@ -81,7 +78,7 @@
 		}
 		
 		/**
-		 * @acces public.
+		 * @access public.
 		 * @param Object $c.
 		 * @return Object.
 		 */
@@ -104,8 +101,8 @@
 		}
 		
 		/**
-		 * @acces public.
-		 * @param Object $query.
+		 * @access public.
+		 * @param Object $object.
 		 * @return Array.
 		 */
 		public function prepareRow(xPDOObject $object) {
