@@ -1,0 +1,46 @@
+{
+    "name": "Archive",
+    "lowCaseName": "archive",
+    "description": "A page archive (grid) solution for MODX Revolution.",
+    "author": "Oetzie.nl",
+    "version": "1.1.0-pl",
+    "package":{
+        "menus": [{
+            "text": "archive",
+            "description": "archive.desc",
+            "parent": "components",
+            "action": "home",
+            "permissions": "archive"
+        }],
+        "elements": {
+            "plugins": [{
+                "name": "Archive",
+                "file": "archive.plugin.php",
+                "events": [
+                    "OnDocFormRender",
+                    "OnDocFormSave"
+                ]
+            }]
+        },
+        "systemSettings": [{
+            "key": "branding_url",
+            "value": "//www.oetzie.nl",
+            "area": "archive"
+        },{
+            "key": "branding_url_help",
+            "value": "//www.oetzie.nl",
+            "area": "archive"
+        }]
+    },
+    "build":{
+        "readme": "docs/readme.txt",
+        "license": "docs/license.txt",
+        "changelog": "docs/changelog.txt",
+        "resolver": {
+            "after": [
+                "tables.resolver.php",
+                "permissions.resolver.php"
+            ]
+        }
+    }
+}

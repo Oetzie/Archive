@@ -1,26 +1,52 @@
 Ext.onReady(function() {
-	if ('content' == Archive.config.archive.position) {
-		if (undefined !== (content = Ext.getCmp('modx-resource-content'))) {
-			content.add({
-		        items		: [{
-		        	xtype		: 'archive-panel-resource'
-		        }]
-		    });
-		    
-		    content.remove('ta');
-		    
-		    content.setTitle(undefined == _(Archive.config.archive.title) ? _('archive.resources') : _(Archive.config.archive.title));
-		}
-	} else {
-		if (undefined !== (tabs = Ext.getCmp('modx-resource-tabs'))) {
-			tabs.insert(0, {
-				title		: undefined == _(Archive.config.archive.title) ? _('archive.resources') : _(Archive.config.archive.title),
-		        items		: [{
-		        	xtype		: 'archive-panel-resource'
-		        }]
-		    });
-		    
-		    tabs.setActiveTab(0);
-		}
-	}
+    if (Archive.config.record) {
+        var record      = Archive.config.record;
+        var resource    = Archive.config.resource;
+
+        var title       = _('archive.resources');
+        var description = _('archive.resources_desc');
+
+        if (record.title_formatted) {
+            title = record.title_formatted;
+        }
+
+        if (record.description_formatted) {
+            description = record.description_formatted;
+        }
+
+        if (record.position === 'content') {
+            var container = Ext.getCmp('modx-resource-content');
+
+            if (container) {
+                container.setTitle(title);
+
+                container.remove('ta');
+
+                container.add({
+                    items       : [{
+                        xtype       : 'archive-panel-resource',
+                        record      : record,
+                        resource    : resource,
+                        description : description
+                    }]
+                });
+            }
+        } else if (record.position === 'tab') {
+            var container = Ext.getCmp('modx-resource-tabs');
+
+            if (container) {
+                container.insert(0, {
+                    title       : title,
+                    items       : [{
+                        xtype       : 'archive-panel-resource',
+                        record      : record,
+                        resource    : resource,
+                        description : description
+                    }]
+                });
+
+                container.setActiveTab(0);
+            }
+        }
+    }
 });
