@@ -397,8 +397,7 @@ Archive.window.CreateGrid = function(config) {
                     description : MODx.expandHelp ? '' : _('archive.label_template_desc'),
                     hiddenName  : 'templates[parent]',
                     anchor      : '100%',
-                    allowBlank  : false,
-                    value       : '1,2'
+                    allowBlank  : false
                 }, {
                     xtype       : MODx.expandHelp ? 'label' : 'hidden',
                     html        : _('archive.label_template_desc'),
@@ -409,8 +408,7 @@ Archive.window.CreateGrid = function(config) {
                     description : MODx.expandHelp ? '' : _('archive.label_template_child_desc'),
                     hiddenName  : 'templates[child]',
                     anchor      : '100%',
-                    allowBlank  : false,
-                    value       : ['1,2']
+                    allowBlank  : false
                 }, {
                     xtype       : MODx.expandHelp ? 'label' : 'hidden',
                     html        : _('archive.label_template_child_desc'),

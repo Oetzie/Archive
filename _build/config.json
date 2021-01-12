@@ -3,7 +3,7 @@
     "lowCaseName": "archive",
     "description": "A page archive (grid) solution for MODX Revolution.",
     "author": "Oetzie.nl",
-    "version": "1.1.0-pl",
+    "version": "1.1.1-pl",
     "package":{
         "menus": [{
             "text": "archive",
